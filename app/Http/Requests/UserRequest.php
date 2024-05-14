@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PhoneRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,13 +23,9 @@ class PhoneRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
-            'imei' => 'required|string|min:15|max:15|unique:phones,imei',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'published_at' => 'nullable|date',
-            'category_id' => 'required|exists:categories,id'
-
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.($this->user ? $this->user->id : ''),
+            'password' => 'required|min:6',
         ];
     }
 }
