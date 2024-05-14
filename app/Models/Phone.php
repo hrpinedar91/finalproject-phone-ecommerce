@@ -9,5 +9,11 @@ class Phone extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'price', 'cover_image', 'published_at', 'category_id'];
+    protected $fillable = ['name', 'brand', 'imei', 'category_id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
